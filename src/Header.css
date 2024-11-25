@@ -1,3 +1,4 @@
+/* Base Styles (default for large screens) */
 .app__header {
   display: flex;
   justify-content: space-between;
@@ -23,4 +24,37 @@
 .header__scoreboard > h2 {
   font-weight: bold;
   font-size: 1.3rem;
+}
+
+/* Media Query: Tablets */
+@media (max-width: 768px) {
+  .app__header {
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    text-align: center;
+  }
+
+  .app__header-title {
+    font-size: 1.5rem;
+  }
+
+  .header__scoreboard > h2 {
+    font-size: 1.1rem;
+  }
+}
+
+/* Media Query: Mobile Devices */
+@media (max-width: 480px) {
+  .app__header-title {
+    font-size: 1.2rem;
+  }
+
+  .header__scoreboard > h2 {
+    font-size: 1rem;
+  }
+
+  .app__header {
+    padding: 0.5rem;
+  }
 }
