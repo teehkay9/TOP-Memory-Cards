@@ -28,18 +28,22 @@ function App() {
 
   useEffect(() => {
     async function getPokemonData() {
-      const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=12");
-      const data = await response.json();
-
-      const pokemonData = data.results.map((pokemon, index) => {
-        return {
+      try {
+        const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=12");
+        if (!response.ok) {
+          throw new Error("Failed to fetch Pokémon data");
+        }
+        const data = await response.json();
+        const pokemonData = data.results.map((pokemon, index) => ({
           name: pokemon.name,
           id: index,
           image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index + 1}.png`,
-        };
-      });
-
-      setPokemonData(pokemonData);
+        }));
+        setPokemonData(pokemonData);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        // Optionally set error state to display a message to the user
+      }
     }
     getPokemonData();
   }, []);
