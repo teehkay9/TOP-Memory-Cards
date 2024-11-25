@@ -16,9 +16,7 @@ function App() {
     if (guesses.has(pokemonName)) {
       setGuesses(new Set([]));
 
-      if (score > highScore) {
-        setHighScore(score);
-      }
+      setHighScore((prevHighScore) => (score > prevHighScore ? score : prevHighScore));
       setScore(0); // reset the score for new round
     } else {
       setGuesses(new Set(guesses).add(pokemonName));
