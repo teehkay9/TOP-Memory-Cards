@@ -1,7 +1,26 @@
 .app__header {
-  border: 1px solid red;
   display: flex;
   justify-content: space-between;
   flex: 1;
   padding: 2rem;
+  background-color: #ffcc00;
+}
+
+.header__description {
+  display: flex;
+  flex-direction: column;
+}
+
+.header__description > h1 {
+  margin-bottom: 2rem;
+}
+
+.app__header-title {
+  font-size: 2rem;
+  font-weight: 900;
+}
+
+.header__scoreboard > h2 {
+  font-weight: bold;
+  font-size: 1.3rem;
 }
