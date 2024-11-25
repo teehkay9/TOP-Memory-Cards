@@ -13,23 +13,23 @@ function randomizeArray(arr) {
   return result;
 }
 
-export default function Gallery({ pokemonList }) {
+export default function Gallery({ pokemonList, onClick }) {
   const randomizedList = randomizeArray(pokemonList);
 
   return (
     <main className="cards-gallery">
-      {randomizedList.map((pok, index) => (
-        <ImageCard key={index} name={pok.name} imageURL={pok.image} />
+      {randomizedList.map((pok) => (
+        <ImageCard key={pok.id} name={pok.name} imageURL={pok.image} onClick={onClick} />
       ))}
     </main>
   );
 }
 
-function ImageCard({ name, imageURL }) {
+function ImageCard({ name, imageURL, onClick }) {
   return (
-    <div className="image-card">
+    <div className="image-card" data-name={name} onClick={onClick}>
       <div className="image-wrapper">
-        <img src={imageURL} alt={`Picture of Pokemon ${name}`} />
+        <img src={imageURL} alt={`Picture of Pokémon ${name}`} />
       </div>
       <h2 className="image-title">{name}</h2>
     </div>

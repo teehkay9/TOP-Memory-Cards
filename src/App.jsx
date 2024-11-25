@@ -5,6 +5,26 @@ import Gallery from "./Gallery";
 
 function App() {
   const [pokemonData, setPokemonData] = useState([]);
+  const [score, setScore] = useState(0);
+  const [guesses, setGuesses] = useState(new Set([]));
+  const [highScore, setHighScore] = useState(0);
+
+  function handleClick(event) {
+    const pokemonName = event.currentTarget.getAttribute("data-name");
+    console.log(pokemonName);
+
+    if (guesses.has(pokemonName)) {
+      setGuesses(new Set([]));
+
+      if (score > highScore) {
+        setHighScore(score);
+      }
+      setScore(0); // reset the score for new round
+    } else {
+      setGuesses(new Set(guesses).add(pokemonName));
+      setScore((prevScore) => prevScore + 1);
+    }
+  }
 
   useEffect(() => {
     async function getPokemonData() {
@@ -14,6 +34,7 @@ function App() {
       const pokemonData = data.results.map((pokemon, index) => {
         return {
           name: pokemon.name,
+          id: index,
           image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index + 1}.png`,
         };
       });
@@ -25,8 +46,8 @@ function App() {
 
   return (
     <div className="app-container">
-      <Header />
-      <Gallery pokemonList={pokemonData} />
+      <Header score={score} highScore={highScore} />
+      <Gallery pokemonList={pokemonData} onClick={handleClick} />
     </div>
   );
 }
